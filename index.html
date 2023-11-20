@@ -33,7 +33,7 @@
 
       colorButton.addEventListener("click", function () {
         resetGridColors();
-        colorRandomCells();
+        colorLShape();
       });
 
       gridItems.forEach(item => {
@@ -42,18 +42,20 @@
         });
       });
 
-      function colorRandomCells() {
-        const randomIndices = [];
-        while (randomIndices.length < 3) {
-          const randomIndex = Math.floor(Math.random() * gridItems.length);
-          if (!randomIndices.includes(randomIndex)) {
-            randomIndices.push(randomIndex);
-          }
-        }
+      function colorLShape() {
+        // ランダムに1つのセルを選び、その周りにL字型に色を付ける
+        const randomIndex = Math.floor(Math.random() * gridItems.length);
+        const row = Math.floor(randomIndex / 7);
+        const col = randomIndex % 7;
 
-        randomIndices.forEach(index => {
-          gridItems[index].style.backgroundColor = "green";
-        });
+        if (col < 6 && row < 5) {
+          // 左上から右への横棒
+          gridItems[randomIndex].style.backgroundColor = "green";
+          gridItems[randomIndex + 1].style.backgroundColor = "green";
+          gridItems[randomIndex + 2].style.backgroundColor = "green";
+          // 左上から下への縦棒
+          gridItems[randomIndex + 7].style.backgroundColor = "green";
+        }
       }
 
       function resetGridColors() {
@@ -109,7 +111,8 @@
     <div class="grid-item"></div>
     <div class="grid-item"></div>
     <div class="grid-item"></div>
+    <div class="grid-item"></div>
   </div>
-  <button id="colorButton">ランダムに色を付ける</button>
+  <button id="colorButton">L字型に色を付ける</button>
 </body>
 </html>
