@@ -6,7 +6,7 @@
   <style>
     body {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       height: 100vh;
       margin: 0;
@@ -14,57 +14,104 @@
 
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(7, 50px);
+      grid-template-columns: repeat(7, 1fr);
       gap: 5px;
     }
 
     .grid-item {
-      width: 50px;
-      height: 50px;
+      width: 30px;
+      height: 30px;
       border: 1px solid #000;
       box-sizing: border-box;
-    }
-
-    .colored {
-      background-color: #3498db; /* ここに好きな色を設定してください */
+      cursor: pointer;
     }
   </style>
-  <title>Coloring Grid</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const gridItems = document.querySelectorAll(".grid-item");
+      const colorButton = document.getElementById("colorButton");
+
+      colorButton.addEventListener("click", function () {
+        resetGridColors();
+        colorRandomCells();
+      });
+
+      gridItems.forEach(item => {
+        item.addEventListener("click", function () {
+          this.style.backgroundColor = "yellow";
+        });
+      });
+
+      function colorRandomCells() {
+        const randomIndices = [];
+        while (randomIndices.length < 3) {
+          const randomIndex = Math.floor(Math.random() * gridItems.length);
+          if (!randomIndices.includes(randomIndex)) {
+            randomIndices.push(randomIndex);
+          }
+        }
+
+        randomIndices.forEach(index => {
+          gridItems[index].style.backgroundColor = "green";
+        });
+      }
+
+      function resetGridColors() {
+        gridItems.forEach(item => {
+          item.style.backgroundColor = "";
+        });
+      }
+    });
+  </script>
 </head>
 <body>
-
-<div class="grid-container" id="gridContainer">
-  <!-- Grid items will be dynamically generated here -->
-</div>
-
-<button onclick="colorGrid()">Color Grid</button>
-
-<script>
-  function colorGrid() {
-    // Clear the grid
-    document.getElementById('gridContainer').innerHTML = '';
-
-    const gridContainer = document.getElementById('gridContainer');
-    const gridSize = 6 * 7;
-    const cellsPerGroup = 3;
-
-    for (let i = 0; i < gridSize; i++) {
-      const gridItem = document.createElement('div');
-      gridItem.className = 'grid-item';
-      gridContainer.appendChild(gridItem);
-    }
-
-    const gridItems = document.querySelectorAll('.grid-item');
-
-    for (let i = 0; i < gridSize; i += cellsPerGroup) {
-      const group = Array.from({ length: cellsPerGroup }, (_, index) => i + index);
-      // Add class to the L-shaped group
-      gridItems[group[0]].classList.add('colored');
-      gridItems[group[1]].classList.add('colored');
-      gridItems[group[2]].classList.add('colored');
-    }
-  }
-</script>
-
+  <div class="grid-container">
+    <!-- 6x7のマスを生成 -->
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+  </div>
+  <button id="colorButton">ランダムに色を付ける</button>
 </body>
 </html>
