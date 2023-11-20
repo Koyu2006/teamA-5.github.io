@@ -18,6 +18,11 @@
       gap: 5px;
     }
 
+    .grid-row {
+      display: flex;
+      gap: 5px;
+    }
+
     .grid-item {
       width: 30px;
       height: 30px;
@@ -51,13 +56,11 @@
 
       // ランダムな3つのセルに色を付ける関数
       function colorRandomCells() {
-        const randomIndices = [];
-        while (randomIndices.length < 3) {
-          const randomIndex = Math.floor(Math.random() * gridItems.length);
-          if (!randomIndices.includes(randomIndex)) {
-            randomIndices.push(randomIndex);
-          }
-        }
+        const randomIndex = Math.floor(Math.random() * gridItems.length);
+        const rowSize = 7;
+
+        // L字になるような3つのランダムなインデックスを選択
+        const randomIndices = [randomIndex, randomIndex + 1, randomIndex + rowSize];
 
         randomIndices.forEach(index => {
           gridItems[index].style.backgroundColor = "green";
@@ -74,107 +77,48 @@
   </script>
 </head>
 <body>
-  <div class="grid-container">
-    <!-- 6x7のマスを生成 -->
-    <div<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 5px;
-    }
-
-    .grid-row {
-      display: flex;
-      gap: 5px;
-    }
-
-    .grid-item {
-      width: 30px;
-      height: 30px;
-      border: 1px solid #000;
-      box-sizing: border-box;
-      cursor: pointer;
-    }
-
-    #colorButton {
-      margin-top: 10px;
-    }
-  </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const gridRows = document.querySelectorAll(".grid-row .grid-item");
-      const colorButton = document.getElementById("colorButton");
-
-      // ボタンクリック時の処理
-      colorButton.addEventListener("click", function () {
-        resetGridColors(); // グリッドの色をリセット
-        colorRandomCells(); // ランダムな3つのセルに色を付ける
-      });
-
-      // 各セルにクリックイベントを追加
-      gridRows.forEach(item => {
-        item.addEventListener("click", function () {
-          // クリックされたセルに色を付ける
-          this.style.backgroundColor = "yellow";
-        });
-      });
-
-      // ランダムな3つのセルに色を付ける関数
-      function colorRandomCells() {
-        const randomIndices = [];
-        while (randomIndices.length < 3) {
-          const randomIndex = Math.floor(Math.random() * gridRows.length);
-          if (!randomIndices.includes(randomIndex)) {
-            randomIndices.push(randomIndex);
-          }
-        }
-
-        randomIndices.forEach(index => {
-          gridRows[index].style.backgroundColor = "green";
-        });
-      }
-
-      // グリッドの色をリセットする関数
-      function resetGridColors() {
-        gridRows.forEach(item => {
-          item.style.backgroundColor = "";
-        });
-      }
-    });
-  </script>
-</head>
-<body>
-  <div class="grid-container">
-    <!-- 6x7のマスを生成 -->
-    <div class="grid-row">
-      <div class="grid-item"></div>
-      <div class="grid-item"></div>
-      <div class="grid-item"></div>
-    </div>
-    <div class="grid-row">
-      <div class="grid-item"></div>
-      <div class="grid-item"></div>
-      <div class="grid-item"></div>
-    </div>
-    <!-- 以下同様に続けていくつかの行を追加 -->
-  </div>
-  <button id="colorButton">ランダムに色を付ける</button>
-</body>
-</html>
-
+  <div class="grid-container"> class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
     <!-- 以下同様に続けていくつかの行を追加 -->
   </div>
   <button id="colorButton">ランダムに色を付ける</button>
