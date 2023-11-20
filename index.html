@@ -33,7 +33,7 @@
 
       colorButton.addEventListener("click", function () {
         resetGridColors();
-        colorLShape();
+        colorTeams();
       });
 
       gridItems.forEach(item => {
@@ -42,20 +42,50 @@
         });
       });
 
-      function colorLShape() {
-        // ランダムに1つのセルを選び、その周りにL字型に色を付ける
-        const randomIndex = Math.floor(Math.random() * gridItems.length);
-        const row = Math.floor(randomIndex / 7);
-        const col = randomIndex % 7;
+      function colorTeams() {
+        const teamColors = generateRandomColors(14);
+        const teamIndices = [];
 
-        if (col < 6 && row < 5) {
-          // 左上から右への横棒
-          gridItems[randomIndex].style.backgroundColor = "green";
-          gridItems[randomIndex + 1].style.backgroundColor = "green";
-          gridItems[randomIndex + 2].style.backgroundColor = "green";
-          // 左上から下への縦棒
-          gridItems[randomIndex + 7].style.backgroundColor = "green";
+        for (let i = 0; i < 14; i++) {
+          const centerIndex = Math.floor(Math.random() * gridItems.length);
+          const topOrBottomIndex = getTopOrBottomIndex(centerIndex);
+          const leftOrRightIndex = getLeftOrRightIndex(centerIndex);
+
+          if (!teamIndices.includes(centerIndex) &&
+              !teamIndices.includes(topOrBottomIndex) &&
+              !teamIndices.includes(leftOrRightIndex)) {
+            teamIndices.push(centerIndex, topOrBottomIndex, leftOrRightIndex);
+          } else {
+            i--;
+          }
         }
+
+        teamIndices.forEach((teamIndex, index) => {
+          const team = teamColors[index % 14];
+          gridItems[teamIndex].style.backgroundColor = team;
+        });
+      }
+
+      function getTopOrBottomIndex(centerIndex) {
+        const row = Math.floor(centerIndex / 7);
+        const col = centerIndex % 7;
+        const topIndex = row > 0 ? centerIndex - 7 : centerIndex + 7;
+        return topIndex;
+      }
+
+      function getLeftOrRightIndex(centerIndex) {
+        const col = centerIndex % 7;
+        const leftIndex = col > 0 ? centerIndex - 1 : centerIndex + 1;
+        return leftIndex;
+      }
+
+      function generateRandomColors(count) {
+        const colors = [];
+        for (let i = 0; i < count; i++) {
+          const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+          colors.push(randomColor);
+        }
+        return colors;
       }
 
       function resetGridColors() {
@@ -113,6 +143,6 @@
     <div class="grid-item"></div>
     <div class="grid-item"></div>
   </div>
-  <button id="colorButton">L字型に色を付ける</button>
+  <button id="colorButton">ランダムに色を付ける</button>
 </body>
 </html>
